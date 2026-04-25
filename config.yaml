@@ -1,0 +1,22 @@
+interval: 5          # seconds between measurement rounds
+ping_count: 4        # pings per round per endpoint
+jitter_window: 20    # rolling window size for jitter calculation
+
+thresholds:          # global defaults (can be overridden per endpoint)
+  latency_ms: 100
+  jitter_ms: 20
+  packet_loss_pct: 5
+
+endpoints:
+  - name: Google DNS
+    host: 8.8.8.8
+  - name: Cloudflare DNS
+    host: 1.1.1.1
+  - name: Google
+    host: google.com
+  - name: Gateway
+    host: 192.168.1.1
+    thresholds:
+      latency_ms: 5
+      jitter_ms: 2
+      packet_loss_pct: 0
