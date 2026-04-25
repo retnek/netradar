@@ -4,6 +4,12 @@ import yaml
 
 
 @dataclass
+class StorageConfig:
+    path: str = "~/.netradar/data.db"
+    retention_days: int = 7
+
+
+@dataclass
 class Thresholds:
     latency_ms: float = 100.0
     jitter_ms: float = 20.0
@@ -28,6 +34,7 @@ class Config:
     ping_count: int = 4
     jitter_window: int = 20
     thresholds: Thresholds = field(default_factory=Thresholds)
+    storage: StorageConfig = field(default_factory=StorageConfig)
 
 
 def load_config(path: str | Path) -> Config:
@@ -49,10 +56,13 @@ def load_config(path: str | Path) -> Config:
             thresholds=ep_thresh,
         ))
 
+    storage = StorageConfig(**data.get("storage", {}))
+
     return Config(
         endpoints=endpoints,
         interval=data.get("interval", 5.0),
         ping_count=data.get("ping_count", 4),
         jitter_window=data.get("jitter_window", 20),
         thresholds=global_thresh,
+        storage=storage,
     )

@@ -1,3 +1,7 @@
+storage:
+  path: "~/.netradar/data.db"
+  retention_days: 7
+
 interval: 5          # seconds between measurement rounds
 ping_count: 4        # pings per round per endpoint
 jitter_window: 20    # rolling window size for jitter calculation
@@ -12,11 +16,11 @@ endpoints:
     host: 8.8.8.8
   - name: Cloudflare DNS
     host: 1.1.1.1
-  - name: Google
-    host: google.com
-  - name: Gateway
-    host: 192.168.1.1
-    thresholds:
-      latency_ms: 5
-      jitter_ms: 2
-      packet_loss_pct: 0
+  #- name: Google
+  #  host: google.com
+  #- name: Gateway
+  #  host: 192.168.1.1
+  #  thresholds:
+  #    latency_ms: 5
+  #    jitter_ms: 2
+  #    packet_loss_pct: 0
